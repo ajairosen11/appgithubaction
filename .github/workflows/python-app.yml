@@ -1,0 +1,35 @@
+name: Python CI #Describes the WorkFlow Name
+
+# Trigger the workflow on any events(push to the main branch or pull request)
+on:
+  push: #This is a Event
+    branches:
+      - main # U have to sepcify the branch over here (Eg. Main, Staging, Production, etc..)
+  pull_request: #This is a Event
+    branches:
+      - main # U have to sepcify the branch over here (Eg. Main, Staging, Production, etc..)
+
+jobs:
+  test:
+    runs-on: ubuntu-latest #These are Containers in which you can run your Project (For Eg: Windows, mac-os, Ubuntu-latest)
+
+    steps:
+      # Step 1: Check out the code from the repository
+      - name: Check out code
+        uses: actions/checkout@v2 #Prebuild Action defined by Github Actions to trigger the Event and then it will move to the Container
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2 #Prebuild Action by Github to Create a Python Environment
+        with:
+          python-version: '3.8'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Step 4: Run tests (Wherver the "Tests" folder is there this will be triggered)
+      - name: Run tests
+        run: pytest
