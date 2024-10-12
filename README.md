@@ -1,1 +1,1 @@
-##This is the Python App (Tutorail For Personal Use)
+##This is the Python App (Tutorial For Personal Use)
